@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <title>To-Do-List</title>
+  </head>
+  <body>
+    <div class="container-lists">
+      <div class="date">
+        <p><%= todaysDate() %></p>
+      </div>
+
+      <div class="list_container">
+        <% if (newListItems.length === 0) { %>
+        <p class="no-task">No task added yet</p>
+        <% } else { %> <% newListItems.forEach((item) => { %>
+        <div class="list-item">
+          <form action="/delete" method="post">
+            <input
+              type="checkbox"
+              name="checkbox"
+              onchange="this.form.submit()"
+              id="checkbox"
+              value="<%= item._id %>"
+            />
+            <label for="checkbox"></label>
+            <p id="task"><%= item.name %></p>
+          </form>
+        </div>
+        <% }) %> <% } %>
+      </div>
+
+      <div class="lists">
+        <form action="/" class="form" method="post">
+          <input
+            type="text"
+            placeholder="Add a new task here"
+            name="taskInput"
+            id="taskInput"
+            value=""
+            autocomplete="off"
+          />
+          <button class="btn" type="submit">+</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
